@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: #ffffff; /* Fondo blanco */
+}
+
+.login-box {
+  position: relative;
+  width: 400px;
+  padding: 20px;
+  background: rgba(255, 0, 0, 0.8); /* Fondo translúcido con color rojo */
+  border: 2px solid rgba(255, 255, 255, 0.5); /* Bordes con color blanco */
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  backdrop-filter: blur(15px);
+}
+
+h2 {
+  font-size: 2em;
+  color: #ffffff; /* Color blanco para el título */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-box {
+  width: 100%;
+  margin: 15px 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-box input {
+  width: calc(100% - 40px);
+  height: 50px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #ffffff; /* Línea inferior blanca */
+  outline: none;
+  font-size: 1em;
+  color: #ffffff; /* Color de texto blanco */
+  padding: 0 5px;
+  margin-left: 35px;
+}
+
+.input-box .icon {
+  position: absolute;
+  left: 0;
+  color: #ffffff; /* Color blanco para el icono */
+  font-size: 1.2em;
+}
+
+.input-box label {
+  position: absolute;
+  top: 50%;
+  left: 35px;
+  color: #ffffff; /* Color blanco para la etiqueta */
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: 0.5s;
+}
+
+.input-box input:focus ~ label,
+.input-box input:valid ~ label {
+  top: -5px;
+  left: 35px;
+  font-size: 0.75em;
+}
+
+.register-link {
+  font-size: .9em;
+  color: #ffffff; /* Color blanco para el texto */
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register-link p a {
+  color: #ffffff; /* Color blanco para el enlace de registro */
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.register-link p a:hover {
+  text-decoration: underline;
+}
+
+button[type="submit"] {
+  width: 100%;
+  height: 40px;
+  background: #ffffff; /* Fondo blanco para el botón de registro */
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #ff0000; /* Color rojo para el texto del botón */
+  font-weight: 600;
+  margin-top: 20px; /* Aumenta el espacio entre el formulario y el botón */
+}

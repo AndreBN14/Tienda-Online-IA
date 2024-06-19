@@ -3,23 +3,11 @@ session_start();
 include('config/config.php');
 
 /**
- * Funcion para obtener todos los productos
- * de mi tienda
+ * Función para obtener los datos de todos los productos
  */
-function obtener_nombre_categoria($con, $idCategoria)
-{
-    $sqlCategoria = "SELECT categoria FROM categorias WHERE id = '" . mysqli_real_escape_string($con, $idCategoria) . "'";
-    $queryCategoria = mysqli_query($con, $sqlCategoria);
-    if (!$queryCategoria) {
-        return false;
-    }
-    $dataCategoria = mysqli_fetch_assoc($queryCategoria);
-    return $dataCategoria['categoria'];
-}
-
 function getProductData($con)
 {
-    $sqlProducts = ("
+    $sqlProducts = "
         SELECT 
             p.id AS prodId,
             p.nameProd,
@@ -31,7 +19,7 @@ function getProductData($con)
             fotoproducts AS f
         ON 
             p.id = f.products_id;
-    ");
+    ";
     $queryProducts = mysqli_query($con, $sqlProducts);
 
     if (!$queryProducts) {
@@ -42,7 +30,7 @@ function getProductData($con)
 }
 
 /**
- * Detalles del producto seleccionado
+ * Función para obtener los detalles del producto seleccionado
  */
 function detalles_producto_seleccionado($con, $idProd)
 {
@@ -52,17 +40,15 @@ function detalles_producto_seleccionado($con, $idProd)
 
     $idProd = mysqli_real_escape_string($con, $idProd);
 
-    $sqlDetalleProducto = ("
+    $sqlDetalleProducto = "
         SELECT 
             p.id AS prodId,
             p.nameProd,
             p.description_Prod,
             p.precio,
-            p.cantidad,
             f.foto1,
             f.foto2,
-            f.foto3,
-            p.id_categoria
+            f.foto3
         FROM 
             products AS p
         INNER JOIN
@@ -72,8 +58,8 @@ function detalles_producto_seleccionado($con, $idProd)
         WHERE
             p.id = '$idProd'
         LIMIT 1;
-    ");
-    
+    ";
+
     $queryProductoSeleccionado = mysqli_query($con, $sqlDetalleProducto);
     if (!$queryProductoSeleccionado) {
         return null;
@@ -82,7 +68,7 @@ function detalles_producto_seleccionado($con, $idProd)
 }
 
 /**
- * Funciona para validar si el carrito tiene algun producto
+ * Función para validar si el carrito tiene algún producto
  */
 function validando_carrito()
 {
@@ -106,12 +92,12 @@ function validando_carrito()
 }
 
 /**
- * Retornando productos del carrito de compra
+ * Función para obtener los productos del carrito de compra
  */
 function mi_carrito_de_compra($con)
 {
     if (isset($_SESSION['tokenStoragel']) && $_SESSION['tokenStoragel'] != "") {
-        $sqlCarritoCompra = ("
+        $sqlCarritoCompra = "
                 SELECT 
                     p.id AS prodId,
                     p.nameProd,
@@ -130,7 +116,7 @@ function mi_carrito_de_compra($con)
                     pedidostemporales AS pt ON p.id = pt.producto_id
                 WHERE 
                     pt.tokenCliente = '" . mysqli_real_escape_string($con, $_SESSION['tokenStoragel']) . "'
-        ");
+        ";
         $queryCarrito = mysqli_query($con, $sqlCarritoCompra);
         if (!$queryCarrito) {
             return false;
@@ -142,7 +128,7 @@ function mi_carrito_de_compra($con)
 }
 
 /**
- * Mostrar la cantidad de productos seleccionados en el icono de carrito
+ * Función para obtener la cantidad total de productos en el carrito
  */
 function iconoCarrito($con)
 {
@@ -162,6 +148,9 @@ function iconoCarrito($con)
     }
 }
 
+/**
+ * Función para obtener el total acumulado de la deuda del carrito
+ */
 function totalAcumuladoDeuda($con)
 {
     if (isset($_SESSION['tokenStoragel']) && $_SESSION['tokenStoragel'] != "") {
@@ -175,6 +164,8 @@ function totalAcumuladoDeuda($con)
         $jqueryDeuda = mysqli_query($con, $SqlDeudaTotal);
         $dataDeuda = mysqli_fetch_array($jqueryDeuda);
         return  number_format($dataDeuda['totalPagar'], 0, '', '.');
+    } else {
+        return '0';
     }
 }
 ?>

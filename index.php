@@ -46,42 +46,7 @@
             </div>
         </div>
 
-        <!-- Categorías -->
-        <div class="container mt-5 pt-5">
-            <div class="row align-items-center">
-                <div class="col-lg-12 text-center">
-                    <div class="section_title">
-                        <h2>Categorías del Mes</h2>
-                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <?php
-                $queryCategorias = "SELECT * FROM categorias";
-                $resultadoCategorias = mysqli_query($con, $queryCategorias);
-
-                if (mysqli_num_rows($resultadoCategorias) > 0) {
-                    while ($categoria = mysqli_fetch_assoc($resultadoCategorias)) {
-                ?>
-                        <div class="col-6 col-md-3 mt-5 text-center">
-                            <div class="category">
-                                <img src="<?php echo htmlspecialchars($categoria['imagen']); ?>" alt="<?php echo htmlspecialchars($categoria['categoria']); ?>">
-                                <p><?php echo htmlspecialchars($categoria['categoria']); ?></p>
-                                <a href="productos.php?categoria_id=<?php echo htmlspecialchars($categoria['id']); ?>" class="btn btn-success">Ver Tienda</a>
-                            </div>
-                        </div>
-                <?php
-                    }
-                } else {
-                    echo "<p class='text-center'>No se encontraron categorías.</p>";
-                }
-                ?>
-            </div>
-        </div>
-
-
-        <!-- Productos -->
+        <!-- Productos Destacados -->
         <div class="container mt-5 pt-5">
             <div class="row align-items-center">
                 <div class="col-lg-12 text-center">
@@ -92,7 +57,7 @@
             </div>
             <?php
             $resultadoProductos = getProductData($con);
-            if ($resultadoProductos) :
+            if ($resultadoProductos && mysqli_num_rows($resultadoProductos) > 0) :
             ?>
                 <div class="row align-items-center">
                     <?php
@@ -124,7 +89,7 @@
                     <?php } ?>
                 </div>
             <?php else : ?>
-                <p class="text-center">No se encontraron productos.</p>
+                <p class="text-center">No se encontraron productos destacados.</p>
             <?php endif; ?>
         </div>
 

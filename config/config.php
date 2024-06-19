@@ -13,3 +13,4 @@ if (!$con) {
 }
 
 //echo "Conexión exitosa a la Base de Datos";
+?>

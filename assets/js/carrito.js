@@ -34,7 +34,7 @@ function agregarCarrito(btn_cart, idProduct, precio) {
 
 //Generando Token Unico del Cliente aleatoriamente
 function tokenUnico() {
-  const caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ23467890";
+  const caracteres = "abcdefghijkmnpqrtuvwxyzABCDEFGHJKMNPQRTUVWXYZ2346789";
   const longitud = 32;
   let tokenCliente = "";
 
@@ -173,16 +173,32 @@ function formatearCantidad(cantidad) {
 /**
  * Funcion que recibe la solicitud para gestionar el pedido
  */
-const solictarPedido = (codPedido) => {
-  const whatsappAPI = "https://api.whatsapp.com/send?phone=";
-  const phoneNumber = "+57xxxxxxxxxx";
+const solicitarPedido = () => {
+    const whatsappAPI = "https://api.whatsapp.com/send?phone=";
+    const Numero = "51933382753"; // Reemplazar con el número de WhatsApp al que se enviará el mensaje
 
-  const link = `http://localhost/tienda-online/pdfPedido.php?codPedido=${codPedido}`;
-  const message = `¡Hola! Me interesa el siguiente pedido: ${link}`;
-  const whatsappURL = `${whatsappAPI}${phoneNumber}&text=${message}`;
+    const button = document.querySelector('.btn-success');
+    const carrito = JSON.parse(button.getAttribute('data-carrito'));
+    const total = button.getAttribute('data-total');
 
-  // Abrir la conversación de WhatsApp en una nueva ventana o pestaña
-  window.open(whatsappURL, "_blank");
+    // Logs de depuración
+    console.log("Carrito:", carrito);
+    console.log("Total:", total);
+
+    // Construir el mensaje de WhatsApp con los detalles del pedido y el carrito de compras
+    let message = `¡Hola! Me interesa el siguiente pedido:\n\n`;
+    message += "Detalles del carrito de compras:\n";
+    carrito.forEach(item => {
+        message += `- ${item.nameProd} x ${item.cantidad} = $${item.total}\n`;
+    });
+    message += `\nTotal a Pagar: $${total}`;
+
+    // Enviar mensaje a través de WhatsApp
+    const whatsappURL = `${whatsappAPI}${Numero}&text=${encodeURIComponent(message)}`;
+    console.log("URL de WhatsApp:", whatsappURL);  // Verificar la URL de WhatsApp
+
+    // Abrir la conversación de WhatsApp en una nueva ventana o pestaña
+    window.open(whatsappURL, "_blank");
 };
 
 /**

@@ -23,17 +23,16 @@
                     <nav class="navbar">
                         <ul class="navbar_menu">
                             <li><a class="nav-link" href="./">Inicio</a></li>
-                            <li><a class="nav-link" href="./categorias.php">Categorías</a></li>
+                            <!-- Eliminamos el siguiente <li> -->
+                            <!-- <li><a class="nav-link" href="./categorias.php">Categorías</a></li> -->
                             <li><a class="nav-link" href="productos.php">Productos</a></li>
-                            <li><a class="nav-link" href="#">Contacto</a></li>
+                            <li><a class="nav-link" href="contacto.php">Contacto</a></li>
                         </ul>
                         <ul class="navbar_user">
                             <li class="checkout">
                                 <a href="carrito.php">
                                     <img src="assets/images/icon.png" alt="dog" style="width: 20px;">
-                                    <?php
-                                    echo iconoCarrito($con);
-                                    ?>
+                                    <?php echo iconoCarrito($con); ?>
                                 </a>
                             </li>
                             <li>
@@ -68,7 +67,8 @@
                 </ul>
             </li>
             <li class="menu_item"><a href="./">Inicio</a></li>
-            <li class="menu_item"><a href="./categorias.php">Categorías</a></li>
+            <!-- Eliminamos el siguiente <li> -->
+            <!-- <li class="menu_item"><a href="./categorias.php">Categorías</a></li> -->
             <li class="menu_item"><a href="productos.php">Productos</a></li>
             <li class="menu_item"><a href="#">Premios</a></li>
         </ul>

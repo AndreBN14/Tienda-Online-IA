@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +13,6 @@
     <link rel="stylesheet" href="assets/styles/loader.css">
     <title>Crea Tu Carrito de Compras Online con la Magia de PHP, JavaScript y MySQL :: Urian Viera </title>
 </head>
-
 <body>
     <div class="page-loading active">
         <div class="page-loading-inner">
@@ -52,7 +50,14 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    while ($dataMiProd = mysqli_fetch_array($miCarrito)) { ?>
+                                    $carritoItems = [];
+                                    while ($dataMiProd = mysqli_fetch_array($miCarrito)) {
+                                        $carritoItems[] = [
+                                            'nameProd' => $dataMiProd["nameProd"],
+                                            'cantidad' => $dataMiProd["cantidad"],
+                                            'total' => $dataMiProd["cantidad"] * $dataMiProd["precio"]
+                                        ];
+                                    ?>
                                         <tr id="resp<?php echo $dataMiProd['tempId']; ?>">
                                             <td>
                                                 <img src="<?php echo $dataMiProd["foto1"]; ?>" alt="Foto_Producto" style="width: 100px;">
@@ -80,7 +85,7 @@
                                                 </a>
                                             </td>
                                         </tr>
-                                    <?php  } ?>
+                                    <?php } ?>
                                     <tr style="background-color: #fff !important;">
                                         <td colspan="4"></td>
                                         <td style="color:#fff; background-color: #ff4545 !important;">
@@ -105,7 +110,10 @@
                                 </a>
                             </div>
                             <div class="col-md-6">
-                                <button class="btn btn-block btn-success" onclick="solictarPedido('<?php echo $_SESSION['tokenStoragel']; ?>')">
+                                <button class="btn btn-block btn-success" 
+                                        onclick="solictarPedido()" 
+                                        data-carrito='<?php echo json_encode($carritoItems); ?>'
+                                        data-total="<?php echo totalAcumuladoDeuda($con); ?>">
                                     Solicitar Pedido
                                     <i class="bi bi-arrow-right-circle"></i>
                                 </button>
@@ -121,12 +129,10 @@
                 </div>
             <?php } ?>
         </div>
-
     </div>
     <?php include('includes/footer.html'); ?>
     </div>
     <?php include('includes/js.html'); ?>
-
+    <script src="assets/js/carrito.js"></script>
 </body>
-
 </html>

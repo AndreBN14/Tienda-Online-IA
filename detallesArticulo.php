@@ -8,14 +8,13 @@
     <link rel="icon" type="image/x-icon" href="assets/images/icon.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/bootstrap4/bootstrap.min.css">
-
     <link rel="stylesheet" type="text/css" href="assets/styles/main_styles.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/responsive.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/single_styles.css">
     <link rel="stylesheet" type="text/css" href="assets/styles/single_responsive.css">
     <link rel="stylesheet" href="assets/styles/button_cart.css">
     <link rel="stylesheet" href="assets/styles/loader.css">
-    <title>Crea Tu Carrito de Compras Online con la Magia de PHP, JavaScript y MySQL :: Urian Viera </title>
+    <title>Detalles del Producto</title>
 </head>
 
 <body>
@@ -87,9 +86,6 @@
                                 <?php echo $dataProduct['nameProd']; ?>
                             </h2>
                             <p>
-                                <strong>Categoría:</strong> <?php echo obtener_nombre_categoria($con, $dataProduct['id_categoria']); ?>
-                            </p>
-                            <p>
                                 <?php echo $dataProduct['description_Prod']; ?>
                             </p>
                         </div>
@@ -99,8 +95,6 @@
                         </div>
 
                         <div class="quantity d-flex flex-column flex-sm-row align-items-sm-center">
-                            <span style="font-size: 18px;">Cantidad disponible: <?php echo $dataProduct['cantidad']; ?></span>
-
                             <div class="red_button add_to_cart_button">
                                 &nbsp;&nbsp;
                                 &nbsp;&nbsp;
